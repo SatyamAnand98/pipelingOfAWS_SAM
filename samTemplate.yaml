@@ -17,8 +17,6 @@ Resources:
             CodeUri: deserialize-demo/
             Handler: main.lambda_handler
             Runtime: python3.7
-            Layers: 
-                - !Ref MyLambdaLayer
             Environment:
               Variables:
                 REGION: us-east-1
@@ -32,23 +30,6 @@ Resources:
             CodeUri: objectpath-data-demo/
             Handler: main.lambda_handler
             Runtime: python3.7
-            Layers: 
-                - !Ref MyLambdaLayer
-            Environment:
-              Variables:
-                REGION: us-east-1
-
-    MyLambdaLayer:
-        Type: AWS::Serverless::LayerVersion
-        Properties:
-            LayerName: MyLambdaLayer
-            Description: My Lambda Layer with Deserialize Function, Objectpath Module & AWS Regions JSON
-            ContentUri: lambda-layers/my-lambda-layer.zip
-            CompatibleRuntimes:
-                - python3.6
-                - python3.7
-            LicenseInfo: MIT
-            RetentionPolicy: Retain
             Environment:
               Variables:
                 REGION: us-east-1
@@ -72,10 +53,3 @@ Resources:
         Environment:
           Variables:
             REGION: us-east-1
-
-Outputs:
-    MyLambdaLayerARN:
-        Value: !Ref MyLambdaLayer
-        Description: MyLambdaLayer ARN
-        Export:
-            Name: my-lambda-layer-arn
